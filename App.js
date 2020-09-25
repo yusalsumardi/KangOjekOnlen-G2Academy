@@ -5,7 +5,7 @@
  * @format
  * @flow strict-local
  */
-
+asd
 import React from 'react';
 import {
   SafeAreaView,
@@ -25,5 +25,5 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const App: () => React$Node = () => {
-  
+
 }
