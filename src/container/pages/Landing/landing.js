@@ -14,6 +14,7 @@ export default class landing extends Component {
           justifyContent: 'flex-end',
           flexDirection: 'column',
           flex: 1,
+          backgroundColor: 'white',
         }}>
         <Image
           source={require('../../../assets/img/imgLanding.jpg')}
@@ -47,7 +48,7 @@ export default class landing extends Component {
             Kang Ojek!
           </Text>
         </View>
-        <LandingBotNav />
+        <LandingBotNav navigation={this.props.navigation} />
         <View
           style={{
             backgroundColor: '#e6ffff',
