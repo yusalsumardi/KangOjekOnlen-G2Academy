@@ -8,10 +8,6 @@ export default class index extends Component {
     this.state = {};
   }
 
-  Testlog = () => {
-    console.log('di organism: ' + this.state.value);
-  };
-
   render() {
     return (
       <View
