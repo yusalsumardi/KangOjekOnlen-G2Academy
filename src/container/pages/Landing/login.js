@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View} from 'react-native';
 import InputLoginNomor from '../../organism/InputLoginNomor';
+import {Icon} from 'react-native-eva-icons';
+import {Button} from '@ui-kitten/components';
 
 export default class login extends Component {
   constructor(props) {
@@ -33,26 +35,24 @@ export default class login extends Component {
             bottom: 15,
             right: 15,
           }}>
-          <TouchableOpacity
+          <Button
+            accessoryLeft={() => (
+              <Icon
+                width={24}
+                height={24}
+                fill="#fff"
+                name="arrow-forward-outline"
+                style={{justifyContent: 'center', flexDirection: 'row'}}
+              />
+            )}
             style={{
-              flexDirection: 'row',
               width: 50,
               height: 50,
               borderRadius: 50,
               backgroundColor: '#31b057',
-              justifyContent: 'center',
-            }}>
-            <Text
-              style={{
-                fontWeight: 'bold',
-                fontSize: 14,
-                justifyContent: 'center',
-                alignSelf: 'center',
-                color: 'white',
-              }}>
-              Next
-            </Text>
-          </TouchableOpacity>
+              borderWidth: 0,
+            }}
+          />
         </View>
       </View>
     );

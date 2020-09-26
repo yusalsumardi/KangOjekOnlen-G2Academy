@@ -5,7 +5,7 @@ import {Input} from '@ui-kitten/components';
 export default class index extends Component {
   constructor(props) {
     super(props);
-    this.state = {timer: 3};
+    this.state = {timer: 5};
   }
 
   componentDidMount() {
@@ -29,10 +29,13 @@ export default class index extends Component {
     this.setState({
       timer: 5,
     });
+    this.interval = setInterval(
+      () => this.setState((prevState) => ({timer: prevState.timer - 1})),
+      1000,
+    );
   };
 
   render() {
-    console.log(this.state.timer);
     if (this.state.timer === 0) {
       return (
         <View
@@ -40,6 +43,9 @@ export default class index extends Component {
             marginTop: 5,
           }}>
           <Input placeholder="*    *   *   *" style={{width: 250}} />
+          <View style={{flex: 1, justifyContent: 'center'}}>
+            <Text></Text>
+          </View>
           <View style={{paddingTop: 5}}>
             <Text style={{color: '#31b057'}} onPress={this.Main}>
               Kirim nomor OTP lagi
@@ -48,6 +54,7 @@ export default class index extends Component {
         </View>
       );
     } else {
+      console.log(this.state.timer);
       return (
         <View
           style={{
@@ -55,9 +62,13 @@ export default class index extends Component {
             marginTop: 5,
             alignItems: 'center',
           }}>
-          <Input placeholder="*    *   *   *" style={{width: 250}} />
+          <Input
+            placeholder="*    *   *   *"
+            style={{width: 250}}
+            keyboardType="numeric"
+          />
           <View style={{flex: 1, justifyContent: 'center'}}>
-            <Text> {this.state.timer}</Text>
+            <Text style={{paddingLeft: 15}}>{this.state.timer}</Text>
           </View>
         </View>
       );

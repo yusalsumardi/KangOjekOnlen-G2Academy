@@ -26,6 +26,7 @@ export default class index extends Component {
         <Input
           placeholder="Input Nomor HP"
           style={{marginLeft: 10, width: 250}}
+          keyboardType="numeric"
         />
       </View>
     );
