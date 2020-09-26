@@ -3,6 +3,15 @@ import {View, Text} from 'react-native';
 import ButtonLanding from '../../../component/atoms/ButtonLanding';
 
 export default class index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  goScreen = (toScreen) => {
+    console.log(this.props);
+    return this.props.navigation.navigate(toScreen);
+  };
+
   render() {
     return (
       <View
@@ -11,8 +20,14 @@ export default class index extends Component {
           justifyContent: 'space-around',
           margin: 20,
         }}>
-        <ButtonLanding buttonName="Masuk" />
-        <ButtonLanding buttonName="Daftar" />
+        <ButtonLanding
+          buttonName="Masuk"
+          action={() => this.goScreen('Login')}
+        />
+        <ButtonLanding
+          buttonName="Daftar"
+          action={() => this.goScreen('Register')}
+        />
       </View>
     );
   }
