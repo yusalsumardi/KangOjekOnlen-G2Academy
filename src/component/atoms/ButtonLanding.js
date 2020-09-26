@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import {Button, TouchableOpacity, StyleSheet, Text} from 'react-native';
 
 const Main = (props) => {
-  const onPressIcon = () => {};
   const buttonName = props.buttonName;
   return (
-    <TouchableOpacity onPress={onPressIcon} style={styles.buttonStyle}>
+    <TouchableOpacity onPress={props.action} style={styles.buttonStyle}>
       <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>
         {buttonName}
       </Text>

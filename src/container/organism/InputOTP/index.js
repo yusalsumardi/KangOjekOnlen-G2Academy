@@ -42,7 +42,15 @@ export default class index extends Component {
           style={{
             marginTop: 5,
           }}>
-          <Input placeholder="*    *   *   *" style={{width: 250}} />
+          <Input
+            placeholder="*    *   *   *"
+            style={{width: 250}}
+            keyboardType="numeric"
+            value={this.props.state.state.value}
+            onChangeText={(text) => {
+              this.props.state.setState({value: text});
+            }}
+          />
           <View style={{flex: 1, justifyContent: 'center'}}>
             <Text></Text>
           </View>
@@ -66,6 +74,11 @@ export default class index extends Component {
             placeholder="*    *   *   *"
             style={{width: 250}}
             keyboardType="numeric"
+            value={this.props.state.state.value}
+            onChangeText={(text) => {
+              this.props.state.setState({value: text});
+              console.log(this.props.state.value);
+            }}
           />
           <View style={{flex: 1, justifyContent: 'center'}}>
             <Text style={{paddingLeft: 15}}>{this.state.timer}</Text>

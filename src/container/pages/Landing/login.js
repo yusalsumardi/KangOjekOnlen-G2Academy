@@ -7,11 +7,20 @@ import {Button} from '@ui-kitten/components';
 export default class login extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      value: '',
+    };
   }
+
+  goScreen = (toScreen) => {
+    console.log(this.props);
+    this.props.navigation.navigate(toScreen);
+  };
+
   render() {
+    console.log(this.state);
     return (
-      <View style={{paddingHorizontal: 20, flex: 1}}>
+      <View style={{paddingHorizontal: 20, flex: 1, backgroundColor: 'white'}}>
         <View style={{marginTop: 50, marginBottom: 5}}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>Masuk</Text>
         </View>
@@ -28,32 +37,61 @@ export default class login extends Component {
             Nomor HP<Text style={{color: 'red'}}>*</Text>
           </Text>
         </View>
-        <InputLoginNomor />
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 15,
-            right: 15,
-          }}>
-          <Button
-            accessoryLeft={() => (
-              <Icon
-                width={24}
-                height={24}
-                fill="#fff"
-                name="arrow-forward-outline"
-                style={{justifyContent: 'center', flexDirection: 'row'}}
-              />
-            )}
+        <InputLoginNomor state={this} />
+        {this.state.value.length >= 11 ? (
+          <View
             style={{
-              width: 50,
-              height: 50,
-              borderRadius: 50,
-              backgroundColor: '#31b057',
-              borderWidth: 0,
-            }}
-          />
-        </View>
+              position: 'absolute',
+              bottom: 15,
+              right: 15,
+            }}>
+            <Button
+              onPress={() => this.goScreen('OTP')}
+              accessoryLeft={() => (
+                <Icon
+                  width={24}
+                  height={24}
+                  fill="#fff"
+                  name="arrow-forward-outline"
+                  style={{justifyContent: 'center', flexDirection: 'row'}}
+                />
+              )}
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 50,
+                backgroundColor: '#31b057',
+                borderWidth: 0,
+              }}
+            />
+          </View>
+        ) : (
+          <View
+            style={{
+              position: 'absolute',
+              bottom: 15,
+              right: 15,
+            }}>
+            <Button
+              accessoryLeft={() => (
+                <Icon
+                  width={24}
+                  height={24}
+                  fill="#fff"
+                  name="arrow-forward-outline"
+                  style={{justifyContent: 'center', flexDirection: 'row'}}
+                />
+              )}
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 50,
+                backgroundColor: '#eee',
+                borderWidth: 0,
+              }}
+            />
+          </View>
+        )}
       </View>
     );
   }

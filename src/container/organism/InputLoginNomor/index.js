@@ -3,6 +3,11 @@ import {View, Text} from 'react-native';
 import {Input} from '@ui-kitten/components';
 
 export default class index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     return (
       <View
@@ -27,6 +32,10 @@ export default class index extends Component {
           placeholder="Input Nomor HP"
           style={{marginLeft: 10, width: 250}}
           keyboardType="numeric"
+          value={this.props.state.state.value}
+          onChangeText={(text) => {
+            this.props.state.setState({value: text});
+          }}
         />
       </View>
     );

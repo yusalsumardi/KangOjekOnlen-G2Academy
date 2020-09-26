@@ -12,7 +12,7 @@ export default class register extends Component {
   }
   render() {
     return (
-      <View style={{paddingHorizontal: 20, flex: 1}}>
+      <View style={{paddingHorizontal: 20, flex: 1, backgroundColor: 'white'}}>
         <View style={{marginTop: 50, marginBottom: 5}}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>Daftar</Text>
         </View>
