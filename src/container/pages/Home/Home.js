@@ -15,7 +15,7 @@ class Home extends React.Component {
           <ScrollView style={{flex: 1, padding: 20, }}>
             <View style={{flexDirection: 'row', width: "100%", alignItems: 'center', justifyContent: 'space-between'}}>
               <SearchBar style={{width: "85%", borderRadius: 20}} title="Cari Layanan..." />
-              <Avatar style={{backgroundColor: "#35B031",width: 40, height: 40, borderRadius: 50, justifyContent: 'center', alignItems: 'center'}}>
+              <Avatar onPress={()=>this.props.navigation.navigate("Profile")} style={{backgroundColor: "#35B031",width: 40, height: 40, borderRadius: 50, justifyContent: 'center', alignItems: 'center'}}>
                 <Icon name="person" width="30" height="30" fill="#fff" />
               </Avatar>
             </View>

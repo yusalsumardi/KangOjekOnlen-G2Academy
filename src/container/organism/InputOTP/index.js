@@ -48,7 +48,11 @@ export default class index extends Component {
             keyboardType="numeric"
             value={this.props.state.state.value}
             onChangeText={(text) => {
-              this.props.state.setState({value: text});
+              if (text.length > 4) {
+                this.props.state.setState({value: this.props.state.state.value});
+              }else {
+                this.props.state.setState({value: text});
+              }
             }}
           />
           <View style={{flex: 1, justifyContent: 'center'}}>
@@ -62,7 +66,6 @@ export default class index extends Component {
         </View>
       );
     } else {
-      console.log(this.state.timer);
       return (
         <View
           style={{
@@ -76,8 +79,11 @@ export default class index extends Component {
             keyboardType="numeric"
             value={this.props.state.state.value}
             onChangeText={(text) => {
-              this.props.state.setState({value: text});
-              console.log(this.props.state.value);
+              if (text.length > 4) {
+                this.props.state.setState({value: this.props.state.state.value});
+              }else {
+                this.props.state.setState({value: text});
+              }
             }}
           />
           <View style={{flex: 1, justifyContent: 'center'}}>

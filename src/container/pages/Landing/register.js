@@ -8,21 +8,22 @@ import InputDaftar from '../../organism/InputDaftar';
 export default class register extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
   render() {
     return (
       <View style={{paddingHorizontal: 20, flex: 1, backgroundColor: 'white'}}>
-        <View style={{marginTop: 50, marginBottom: 5}}>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>Daftar</Text>
-        </View>
-        <View>
-          <Text>
-            Kami ingin mengenal kamu lebih dekat. Lengkapi data dirimu dibawah
-            ini ya!
-          </Text>
-        </View>
-        <InputDaftar />
+        <ScrollView>
+          <View style={{marginTop: 50, marginBottom: 5}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Daftar</Text>
+          </View>
+          <View>
+            <Text>
+              Kami ingin mengenal kamu lebih dekat. Lengkapi data dirimu dibawah
+              ini ya!
+            </Text>
+          </View>
+          <InputDaftar />
+        </ScrollView>
         <View
           style={{
             position: 'absolute',
@@ -37,7 +38,7 @@ export default class register extends Component {
                 fill="#fff"
                 name="arrow-forward-outline"
                 style={{justifyContent: 'center', flexDirection: 'row'}}
-              />
+                />
             )}
             style={{
               width: 50,
@@ -46,7 +47,8 @@ export default class register extends Component {
               backgroundColor: '#31b057',
               borderWidth: 0,
             }}
-          />
+            onPress={()=>this.props.navigation.navigate("OTP")}
+            />
         </View>
       </View>
     );

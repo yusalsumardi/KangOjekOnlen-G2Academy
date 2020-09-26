@@ -1,11 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 
 function Avatar(props) {
   return(
-    <View {...props}>
+    <TouchableOpacity {...props}>
       {props.children}
-    </View>
+    </TouchableOpacity>
   )
 }
 export default Avatar;
