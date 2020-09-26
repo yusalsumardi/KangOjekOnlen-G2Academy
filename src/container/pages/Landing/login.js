@@ -13,12 +13,10 @@ export default class login extends Component {
   }
 
   goScreen = (toScreen) => {
-    console.log(this.props);
     this.props.navigation.navigate(toScreen);
   };
 
   render() {
-    console.log(this.state);
     return (
       <View style={{paddingHorizontal: 20, flex: 1, backgroundColor: 'white'}}>
         <View style={{marginTop: 50, marginBottom: 5}}>

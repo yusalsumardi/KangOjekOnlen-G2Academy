@@ -6,7 +6,9 @@ import {
     Text
 } from "react-native"
 import ChatBot from 'react-native-chatbot'
-
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 const steps = [
     {
         id: "1",
@@ -63,11 +65,9 @@ const steps = [
 export default class Chat extends React.Component {
     constructor(props){
         super(props);
-        this.state={
-        }
     }
     render(){
-        return(            
+        return(
             <View style={styles.container}>
                 <ChatBot steps={steps} />
             </View>
@@ -79,5 +79,5 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 20
-    }    
+    }
 })

@@ -5,12 +5,15 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {Input} from '@ui-kitten/components';
 
 export default class index extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <View
         style={{
           paddingHorizontal: 15,
-          paddingTop: 50,
+          paddingTop: 10,
           backgroundColor: '#fff',
           flex: 1,
         }}>
@@ -192,7 +195,7 @@ export default class index extends Component {
               marginTop: 50,
               marginBottom: 20,
             }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.props.state.setState({isLogged:false})}>
               <Text style={{color: 'red', fontSize: 15, fontWeight: 'bold'}}>
                 Keluar
               </Text>

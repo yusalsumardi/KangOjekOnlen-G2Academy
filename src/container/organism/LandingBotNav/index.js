@@ -8,7 +8,6 @@ export default class index extends Component {
     this.state = {};
   }
   goScreen = (toScreen) => {
-    console.log(this.props);
     return this.props.navigation.navigate(toScreen);
   };
 

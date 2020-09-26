@@ -16,21 +16,15 @@ export default class otp extends Component {
 
   authOTP = (val) => {
     if (val == this.state.OTP) {
-      this.setState({
-        isOTPTrue: false,
-      });
-      this.goScreen('LandingPage');
+      this.props.state.setState({isLogged:true})
     } else {
       this.setState({
         isOTPTrue: true,
       });
-      console.log('Salah');
-      // return <Text style={{color: 'red'}}>Salah Tong!</Text>;
     }
   };
 
   goScreen = (toScreen) => {
-    console.log(this.props);
     this.props.navigation.navigate(toScreen);
   };
 
