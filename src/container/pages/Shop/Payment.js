@@ -75,7 +75,7 @@ class Payment extends React.Component {
           </View>
         </View>
         <View style={{position: 'absolute', bottom: 15, width: "100%", alignItems: 'center'}}>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("Result")}>
             <View style={{backgroundColor: "#31B057",width: "90%", padding: 10, borderRadius: 5}}>
                 <Text style={{textAlign: 'center',fontWeight: 'bold', color:'#fff'}}>Bayar</Text>
             </View>

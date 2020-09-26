@@ -5,6 +5,9 @@ import { Icon } from 'react-native-eva-icons';
 import { Button } from '@ui-kitten/components';
 
 class Ride extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   state ={
     show : true
   }
@@ -15,6 +18,7 @@ class Ride extends React.Component {
           <Button
           style={{borderRadius: 100,width: 40,height: 40,padding: 0, backgroundColor: "#fff", borderWidth: 0, marginBottom: 10, marginLeft: 10}}
           accessoryLeft={()=><Icon name="arrow-back-outline" style={{width: 25,height: 25}} fill="#444" />}
+          onPress={()=>this.props.navigation.goBack()}
           />
         ):null}
         <View style={this.state.show ? style.show : style.hide}>

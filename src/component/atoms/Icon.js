@@ -8,9 +8,7 @@ const Main = (props) => {
     iconRef.current?.startAnimation();
   }
   return(
-    <TouchableWithoutFeedback onPress={onPressIcon}>
-      <Icon ref={iconRef} {...props} />
-    </TouchableWithoutFeedback>
+    <Icon ref={iconRef} {...props} />
   )
 }
 export default Main;
