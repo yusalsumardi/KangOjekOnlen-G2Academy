@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "52517908417",
+    "firebase_url": "https://kangojek-494f4.firebaseio.com",
+    "project_id": "kangojek-494f4",
+    "storage_bucket": "kangojek-494f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52517908417:android:c17b85e10b2f14130dc940",
+        "android_client_info": {
+          "package_name": "com.kangojekonlen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52517908417-g8uhnph33effvnkgkjbldtt0443o7i0b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqdtuxX2yHcB9SsMrhBV_cZ3F8yqvTcNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52517908417-g8uhnph33effvnkgkjbldtt0443o7i0b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

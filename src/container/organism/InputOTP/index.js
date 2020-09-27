@@ -5,7 +5,7 @@ import {Input} from '@ui-kitten/components';
 export default class index extends Component {
   constructor(props) {
     super(props);
-    this.state = {timer: 5};
+    this.state = {timer: 30};
   }
 
   componentDidMount() {
@@ -27,7 +27,7 @@ export default class index extends Component {
 
   Main = () => {
     this.setState({
-      timer: 5,
+      timer: 30,
     });
     this.interval = setInterval(
       () => this.setState((prevState) => ({timer: prevState.timer - 1})),
@@ -48,7 +48,7 @@ export default class index extends Component {
             keyboardType="numeric"
             value={this.props.state.state.value}
             onChangeText={(text) => {
-              if (text.length > 4) {
+              if (text.length > 6) {
                 this.props.state.setState({value: this.props.state.state.value});
               }else {
                 this.props.state.setState({value: text});
@@ -79,7 +79,7 @@ export default class index extends Component {
             keyboardType="numeric"
             value={this.props.state.state.value}
             onChangeText={(text) => {
-              if (text.length > 4) {
+              if (text.length > 6) {
                 this.props.state.setState({value: this.props.state.state.value});
               }else {
                 this.props.state.setState({value: text});

@@ -13,12 +13,15 @@ import {
   Landing,
   Login,
   Register,
-  OTP
+  OTP,
+  Splash
 } from './container/pages';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import Context from './context';
 const Stack = createStackNavigator();
 
@@ -51,34 +54,38 @@ function Logged(props) {
 
 class App extends React.Component {
   state={
-    isLogged:false
+    isLogged:false,
+    isLoading:true
+  }
+  componentDidMount() {
+    (async ()=>{
+      try {
+        const cek = await AsyncStorage.getItem('isLogged');
+        if (cek) {
+          cek === "0" ? this.setState({isLogged:false}) : this.setState({isLogged:true});
+        }
+        this.setState({isLoading:false})
+      } catch (e) {
+        console.log(e);
+      }
+    })()
   }
   render(){
     return(
-      <AppContext>
-        <ApplicationProvider {...eva} theme={eva.light}>
+      <ApplicationProvider {...eva} theme={eva.light}>
+        {this.state.isLoading ? (
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Splash">
+              <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        ):(
           <NavigationContainer>
             {this.state.isLogged ? <Logged state={this} /> : <NotLogged state={this} />}
           </NavigationContainer>
-        </ApplicationProvider>
-      </AppContext>
+        )}
+      </ApplicationProvider>
     )
-  }
-}
-class AppContext extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state={
-      isLogged:false
-    }
-  }
-
-  render() {
-    return (
-      <Context.Provider value={{state:this.state,setState:this.setState}}>
-        {this.props.children}
-      </Context.Provider>
-    );
   }
 }
 export default App;

@@ -10,6 +10,7 @@ import Shop from './Shop/ShopScreen';
 import DetailStore from './Shop/DetailStore';
 import Payment from './Shop/Payment';
 import Result from './Shop/Result';
+import Splash from './Splash';
 export {
   Chat,
   Home,
@@ -22,5 +23,6 @@ export {
   Shop,
   DetailStore,
   Payment,
-  Result
+  Result,
+  Splash
 }
