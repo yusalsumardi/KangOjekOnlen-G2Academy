@@ -12,11 +12,7 @@ const TabTop = createMaterialTopTabNavigator()
 export default class HomeView extends React.Component {
     constructor(props){
         super(props);
-        this.state={
-        }
     }
-
-
     render(){
         return(
             <View style={styles.container}>
@@ -24,12 +20,13 @@ export default class HomeView extends React.Component {
                     tabBarOptions={{
                         style: {
                             backgroundColor: '#35B031',
+                            borderWidth:0,
+                            elevation:0
                         },
                         labelStyle: {
-                            color: 'white',
+                            color: 'white'
                         },
                         tabStyle: {
-                            marginHorizontal: 50,
                             marginVertical: 5
                         },
                         pressColor: '#24723B',
@@ -37,28 +34,18 @@ export default class HomeView extends React.Component {
                         showIcon: true,
                         showLabel: true,
                         indicatorStyle: {
-                            width: "25%",
+                            width: "20%",
                             backgroundColor: "#24723B",
-                            borderWidth: 25,
+                            borderWidth: 15,
                             borderColor: '#24723B',
                             borderRadius: 30,
-                            marginTop: 5,
-                            marginBottom: 5,
-                            marginLeft: 55
+                            marginBottom:12,
+                            marginLeft:60
                         }
                     }}
                 >
-                    <TabTop.Screen
-                            name="Home"
-                            children={(props) =>
-                            <Home {...props}
-                            />}
-                    />
-                    <TabTop.Screen name="Chat"
-                            children={(props) =>
-                            <Chat {...props}
-                            />}
-                    />
+                    <TabTop.Screen name="Home" component={Home} />
+                    <TabTop.Screen name="Chat" component={Chat} />
                 </TabTop.Navigator>
             </View>
         )
@@ -68,6 +55,8 @@ export default class HomeView extends React.Component {
 var styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: '#FEE9E4'
+        backgroundColor: '#fff',
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
     }
 })

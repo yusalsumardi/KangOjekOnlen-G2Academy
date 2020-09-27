@@ -24,7 +24,7 @@ class Result extends React.Component {
               Saldo telah di potong
             </Text>
           </View>
-          <TouchableOpacity onPress={()=>this.props.navigation.navigate("Home")}>
+          <TouchableOpacity onPress={()=>this.props.navigation.navigate("HomeView",{token:"1234"})}>
             <View style={{borderWidth: 2,paddingVertical: 10, paddingHorizontal: 20, borderColor: "#35B031", borderRadius: 20}}>
               <Text style={{color: "#35B031", fontWeight: 'bold'}}>Kembali ke Home</Text>
             </View>

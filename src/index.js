@@ -21,6 +21,7 @@ import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
+import firestore from '@react-native-firebase/firestore';
 
 import Context from './context';
 const Stack = createStackNavigator();
@@ -72,20 +73,43 @@ class App extends React.Component {
   }
   render(){
     return(
-      <ApplicationProvider {...eva} theme={eva.light}>
-        {this.state.isLoading ? (
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName="Splash">
-              <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        ):(
-          <NavigationContainer>
-            {this.state.isLogged ? <Logged state={this} /> : <NotLogged state={this} />}
-          </NavigationContainer>
-        )}
-      </ApplicationProvider>
+      <AppContext>
+        <ApplicationProvider {...eva} theme={eva.light}>
+          {this.state.isLoading ? (
+            <NavigationContainer>
+              <Stack.Navigator initialRouteName="Splash">
+                <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}} />
+              </Stack.Navigator>
+            </NavigationContainer>
+          ):(
+            <NavigationContainer>
+              {this.state.isLogged ? <Logged state={this} /> : <NotLogged state={this} />}
+            </NavigationContainer>
+          )}
+        </ApplicationProvider>
+      </AppContext>
     )
   }
+}
+
+function AppContext(props) {
+  const [balance,setBalance] = React.useState(0);
+  React.useEffect(()=>{
+    (async ()=>{
+      try {
+        const dataLocal = await AsyncStorage.getItem("userLogged");
+        const bln = await firestore().doc(JSON.parse(dataLocal).path).get();
+        const balance = bln.data().balance
+        setBalance(balance)
+      } catch (e) {
+        console.log(e);
+      }
+    })()
+  },[balance])
+  return(
+    <Context.Provider value={[balance,setBalance]}>
+      {props.children}
+    </Context.Provider>
+  )
 }
 export default App;
