@@ -7,6 +7,7 @@ import {
   Payment,
   Result,
   Ride,
+  PayRide,
   HomeView,
   Profile,
   Chat,
@@ -41,6 +42,7 @@ function Logged(props) {
     <Stack.Navigator initialRouteName="HomeView">
       <Stack.Screen name="HomeView" component={HomeView} options={{headerShown:false}} />
       <Stack.Screen name="Ride" component={Ride} options={{headerShown:false}} />
+      <Stack.Screen name="PayRide" component={PayRide} options={{headerShown:false}} />
       <Stack.Screen name="Shop" component={Shop} options={{headerShown:false}} />
       <Stack.Screen name="DetailStore" component={DetailStore} options={{headerShown:false}} />
       <Stack.Screen name="Payment" component={Payment} options={{headerShown:false}} />
@@ -48,7 +50,7 @@ function Logged(props) {
       {/*Yusal*/}
       <Stack.Screen name="Profile" children={nav=><Profile {...nav} state={props.state} />}/>
       {/*Rifqi*/}
-      <Stack.Screen name="Chat" component={Chat}/>
+      <Stack.Screen name="Chat" component={Chat} />
     </Stack.Navigator>
   )
 }
