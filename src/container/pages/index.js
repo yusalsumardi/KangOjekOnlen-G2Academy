@@ -1,5 +1,6 @@
 import Chat from './Chat';
 import Home from './Home';
+import HomeView from './HomeView'
 import Landing from './Landing/landing';
 import Login from './Landing/login';
 import OTP from './Landing/otp';
@@ -13,6 +14,7 @@ import Result from './Shop/Result';
 export {
   Chat,
   Home,
+  HomeView,
   Landing,
   Login,
   OTP,

@@ -7,7 +7,7 @@ import {
   Payment,
   Result,
   Ride,
-  Home,
+  HomeView,
   Profile,
   Chat,
   Landing,
@@ -34,8 +34,8 @@ function NotLogged(props) {
 }
 function Logged(props) {
   return(
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={Home} options={{headerShown:false}} />
+    <Stack.Navigator initialRouteName="HomeView">
+      <Stack.Screen name="HomeView" component={HomeView} options={{headerShown:false}} />
       <Stack.Screen name="Ride" component={Ride} options={{headerShown:false}} />
       <Stack.Screen name="Shop" component={Shop} options={{headerShown:false}} />
       <Stack.Screen name="DetailStore" component={DetailStore} options={{headerShown:false}} />
