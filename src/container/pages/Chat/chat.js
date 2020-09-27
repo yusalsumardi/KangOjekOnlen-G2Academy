@@ -3,13 +3,13 @@ import {
     View,
     StyleSheet,
     ScrollView,
-    Text
+    Text,
+    LogBox,
+    YellowBox
 } from "react-native"
 import ChatBot from 'react-native-chatbot'
-import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs(true);//Ignore all log notifications
-// console.disableYellowBox = true;
+YellowBox.ignoreWarnings([""])
+
 const steps = [
     {
         id: "1",
@@ -69,9 +69,11 @@ export default class Chat extends React.Component {
     }
     render(){
         return(
+          <View style={{flex: 1, backgroundColor: "#35B031"}}>
             <View style={styles.container}>
-                <ChatBot steps={steps} />
+              <ChatBot steps={steps} contentStyle={{backgroundColor: "#fff"}} />
             </View>
+          </View>
         )
     }
 }
@@ -79,6 +81,9 @@ export default class Chat extends React.Component {
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20
+        paddingTop: 20,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        backgroundColor: "#fff",
     }
 })

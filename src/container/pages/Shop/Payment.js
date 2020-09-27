@@ -2,6 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
 import Header from './../../../component/molecules/Header';
 import TitleContent from './../../../component/molecules/TitleContent';
+import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-community/async-storage';
+import Context from './../../../context';
 
 function Title() {
   return(
@@ -10,14 +13,31 @@ function Title() {
 }
 
 class Payment extends React.Component {
+  static contextType = Context
   constructor(props) {
     super(props);
   }
   state = {
     jumlah : 1,
-    price : 50000,
+    price : 30000,
     ongkir : 12000
   };
+  componentDidMount() {
+    (async ()=>{
+      try {
+        const data = await AsyncStorage.getItem("userLogged");
+        const bln = await firestore().doc(JSON.parse(data).path).get();
+        const res = bln.data().balance
+        if (data) {
+          this.setState(JSON.parse(data))
+        }
+        this.setState({balance:res});
+        this.setState({isLoading:false})
+      } catch (e) {
+        console.log(e);
+      }
+    })()
+  }
   componentDidUpdate(){
     if (this.state.jumlah < 1) {
       this.setState({jumlah:1})
@@ -25,6 +45,21 @@ class Payment extends React.Component {
   }
   toCurency(num){
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+  }
+  actionBayar = async () => {
+    try {
+      const ctx = this.context
+      if (this.state.balance >= (this.state.jumlah * this.state.price) + this.state.ongkir) {
+        const curBalance = parseInt(this.state.balance) - parseInt((this.state.jumlah * this.state.price) + this.state.ongkir);
+        const res = await firestore().doc(this.state.path).update({balance:curBalance})
+        ctx[1](curBalance)
+        this.props.navigation.navigate("Result")
+      }else {
+        alert("Saldo anda tidak cukup");
+      }
+    } catch (e) {
+
+    }
   }
   render() {
     return (
@@ -75,7 +110,7 @@ class Payment extends React.Component {
           </View>
         </View>
         <View style={{position: 'absolute', bottom: 15, width: "100%", alignItems: 'center'}}>
-          <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("Result")}>
+          <TouchableWithoutFeedback onPress={this.actionBayar}>
             <View style={{backgroundColor: "#31B057",width: "90%", padding: 10, borderRadius: 5}}>
                 <Text style={{textAlign: 'center',fontWeight: 'bold', color:'#fff'}}>Bayar</Text>
             </View>
