@@ -12,7 +12,7 @@ class Home extends React.Component {
     super(props);
     this.state={
       balance:0,
-      count:0
+      history:[]
     }
   }
   componentDidMount() {
@@ -20,10 +20,15 @@ class Home extends React.Component {
       try {
         const data = await AsyncStorage.getItem("userLogged");
         const bln = await firestore().doc(JSON.parse(data).path).get();
+        const history = await firestore()
+        .collection("History")
+        .where('phone','==',JSON.parse(data).phone)
+        .get();
         const res = bln.data().balance
         if (data) {
           this.setState(JSON.parse(data))
         }
+        this.setState({history:history.docs})
         this.setState({balance:res});
         this.setState({isLoading:false})
       } catch (e) {
@@ -35,7 +40,7 @@ class Home extends React.Component {
     return (
       <View style={{flex: 1, backgroundColor: "#35B031", justifyContent: 'space-between'}}>
         <View style={{flex: 1,paddingVertical: 20, backgroundColor: "#fff", borderTopRightRadius: 30,borderTopLeftRadius: 30}}>
-          <ScrollView style={{flex: 1, padding: 20, }}>
+          <ScrollView style={{flex: 1, padding: 20, }} showsVerticalScrollIndicator={false}>
             <View style={{flexDirection: 'row', width: "100%", alignItems: 'center', justifyContent: 'space-between'}}>
               <SearchBar style={{width: "85%", borderRadius: 20}} title="Cari Layanan..." />
               <Avatar onPress={()=>this.props.navigation.navigate("Profile")} style={{backgroundColor: "#35B031",width: 40, height: 40, borderRadius: 50, justifyContent: 'center', alignItems: 'center'}}>
@@ -75,18 +80,21 @@ class Home extends React.Component {
                 </View>
               </View>
             </View>
-            <View style={{flex: 1, marginTop: 30}}>
+            <View style={{flex: 1, marginTop: 30, marginBottom: 20}}>
               <View style={{flexDirection: 'row'}}>
                 <Icon name="clipboard-outline" width="20" height="20" fill="#3498db" />
                 <Text style={{fontSize: 18, marginBottom: 10, marginLeft: 5}}>Aktivitas kamu terakhir</Text>
               </View>
-              <View style={{width: "100%", backgroundColor: "#fff" , borderWidth: 1, borderColor: "#ddd", borderRadius: 20, padding: 20, flexDirection: 'row', justifyContent: 'space-between'}}>
-                <View>
-                  <Text style={{fontSize: 20, fontWeight: "bold"}}>Ride</Text>
-                  <Text style={{fontSize: 16, color: "#333", marginTop: 5}}>Jalan TB Simatupang</Text>
+              {this.state.history.map((item,i)=>(
+                <View key={i} style={{width: "100%", backgroundColor: "#fff" , borderWidth: 1, borderColor: "#ddd", borderRadius: 20, padding: 20, flexDirection: 'row', justifyContent: 'space-between',marginBottom: 10}}>
+                  <View>
+                    <Text style={{fontSize: 20, fontWeight: "bold"}}>{item.data().title}</Text>
+                    <Text style={{fontSize: 16, color: "#333", marginTop: 5}}>{item.data().desc}</Text>
+                  </View>
+                  <Text style={{fontSize: 20}}>- Rp{item.data().price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</Text>
                 </View>
-                <Text style={{fontSize: 20}}>- Rp5.000</Text>
-              </View>
+              ))}
+
             </View>
           </ScrollView>
         </View>

@@ -34,19 +34,19 @@ class DetailStore extends React.Component {
                   </View>
                   <View style={{flexDirection: 'row'}}>
                     <Icon name="pin-outline" width="20" height="20" fill="#666" />
-                    <Text style={{fontSize: 14,color: "#666"}}>Kalibata Tengah</Text>
+                    <Text style={{fontSize: 14,color: "#666"}}>{this.props.route.params.data.alamat}</Text>
                   </View>
                 </View>
                 <View style={{padding: 5,marginTop: 5,flexDirection: 'row'}}>
                   <Icon name="star" width="20" height="20" fill="#ffd57e" />
-                  <Text style={{marginLeft: 5,color: "#333",fontWeight: "bold"}}>4.3/5</Text>
+                  <Text style={{marginLeft: 5,color: "#333",fontWeight: "bold"}}>{this.props.route.params.data.rating}/5</Text>
                 </View>
             </View>
             <View style={{marginLeft: 40}}>
               <View style={{borderWidth: 1, borderColor: "#eee", borderRadius: 20, padding: 10}}>
               <Image
                 style={{resizeMode:'cover',width: 60,height: 60, alignSelf: 'center'}}
-                source={require('./../../../assets/img/Shop/detailToko.jpg')}
+                source={this.props.route.params.data.imgdetail}
                 />
               </View>
             </View>
@@ -54,70 +54,24 @@ class DetailStore extends React.Component {
           {/*Title Content*/}
           <TitleContent title="Produk" style={{borderBottomWidth: 1, borderColor: "#ccc",paddingBottom: 10,marginTop: 20}} />
           {/* Produk list */}
-          <View style={{flexDirection: 'row',marginTop: 20,justifyContent: 'space-between'}}>
-            <View style={{width: "70%"}}>
-              <Text style={{fontWeight: 'bold',fontSize: 18,color: "#333"}}>Cookie Monster</Text>
-              <Text style={{fontSize: 16,color: "#444",marginTop: 5}}>Blue Monster with fudgy chocolate chip filling</Text>
-              <Text style={{fontWeight: "bold",fontSize: 16,marginTop: 20}}>50.000</Text>
+          {this.props.route.params.data.produk.map((item,i)=>(
+            <View style={{flexDirection: 'row',marginTop: 20,justifyContent: 'space-between'}}>
+              <View style={{width: "70%"}}>
+                <Text style={{fontWeight: 'bold',fontSize: 18,color: "#333"}}>{item.namprod}</Text>
+                <Text style={{fontSize: 16,color: "#444",marginTop: 5}}>{item.ketprod}</Text>
+                <Text style={{fontWeight: "bold",fontSize: 16,marginTop: 20}}>{item.harprod.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</Text>
+              </View>
+              <View>
+              <Image
+                style={{resizeMode:'cover',width: 80,height: 80, alignSelf: 'center'}}
+                source={item.imgprod}
+                />
+              <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("Payment",{data:item,title:"Shop",desc:this.props.route.params.data.alamat})}>
+                  <Text style={{backgroundColor: "#fff",borderWidth: 2,borderColor: "#31B057",textAlign: 'center',color: "#31B057",borderRadius: 30,paddingVertical: 1,marginTop: 10, fontWeight: 'bold',fontSize: 16}}>Beli</Text>
+                </TouchableWithoutFeedback>
+              </View>
             </View>
-            <View>
-            <Image
-              style={{resizeMode:'cover',width: 80,height: 80, alignSelf: 'center'}}
-              source={require('./../../../assets/img/Shop/produk.jpg')}
-              />
-            <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("Payment")}>
-                <Text style={{backgroundColor: "#fff",borderWidth: 2,borderColor: "#31B057",textAlign: 'center',color: "#31B057",borderRadius: 30,paddingVertical: 1,marginTop: 10, fontWeight: 'bold',fontSize: 16}}>Beli</Text>
-              </TouchableWithoutFeedback>
-            </View>
-          </View>
-          <View style={{flexDirection: 'row',marginTop: 20,justifyContent: 'space-between'}}>
-            <View style={{width: "70%"}}>
-              <Text style={{fontWeight: 'bold',fontSize: 18,color: "#333"}}>Cookie Monster</Text>
-              <Text style={{fontSize: 16,color: "#444",marginTop: 5}}>Blue Monster with fudgy chocolate chip filling</Text>
-              <Text style={{fontWeight: "bold",fontSize: 16,marginTop: 20}}>50.000</Text>
-            </View>
-            <View>
-            <Image
-              style={{resizeMode:'cover',width: 80,height: 80, alignSelf: 'center'}}
-              source={require('./../../../assets/img/Shop/produk.jpg')}
-              />
-            <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("Payment")}>
-                <Text style={{backgroundColor: "#fff",borderWidth: 2,borderColor: "#31B057",textAlign: 'center',color: "#31B057",borderRadius: 30,paddingVertical: 1,marginTop: 10, fontWeight: 'bold',fontSize: 16}}>Beli</Text>
-              </TouchableWithoutFeedback>
-            </View>
-          </View>
-          <View style={{flexDirection: 'row',marginTop: 20,justifyContent: 'space-between'}}>
-            <View style={{width: "70%"}}>
-              <Text style={{fontWeight: 'bold',fontSize: 18,color: "#333"}}>Cookie Monster</Text>
-              <Text style={{fontSize: 16,color: "#444",marginTop: 5}}>Blue Monster with fudgy chocolate chip filling</Text>
-              <Text style={{fontWeight: "bold",fontSize: 16,marginTop: 20}}>50.000</Text>
-            </View>
-            <View>
-            <Image
-              style={{resizeMode:'cover',width: 80,height: 80, alignSelf: 'center'}}
-              source={require('./../../../assets/img/Shop/produk.jpg')}
-              />
-            <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("Payment")}>
-                <Text style={{backgroundColor: "#fff",borderWidth: 2,borderColor: "#31B057",textAlign: 'center',color: "#31B057",borderRadius: 30,paddingVertical: 1,marginTop: 10, fontWeight: 'bold',fontSize: 16}}>Beli</Text>
-              </TouchableWithoutFeedback>
-            </View>
-          </View>
-          <View style={{flexDirection: 'row',marginTop: 20,justifyContent: 'space-between'}}>
-            <View style={{width: "70%"}}>
-              <Text style={{fontWeight: 'bold',fontSize: 18,color: "#333"}}>Cookie Monster</Text>
-              <Text style={{fontSize: 16,color: "#444",marginTop: 5}}>Blue Monster with fudgy chocolate chip filling</Text>
-              <Text style={{fontWeight: "bold",fontSize: 16,marginTop: 20}}>50.000</Text>
-            </View>
-            <View>
-            <Image
-              style={{resizeMode:'cover',width: 80,height: 80, alignSelf: 'center'}}
-              source={require('./../../../assets/img/Shop/produk.jpg')}
-              />
-            <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("Payment")}>
-                <Text style={{backgroundColor: "#fff",borderWidth: 2,borderColor: "#31B057",textAlign: 'center',color: "#31B057",borderRadius: 30,paddingVertical: 1,marginTop: 10, fontWeight: 'bold',fontSize: 16}}>Beli</Text>
-              </TouchableWithoutFeedback>
-            </View>
-          </View>
+          ))}
         </ScrollView>
 
       </View>
