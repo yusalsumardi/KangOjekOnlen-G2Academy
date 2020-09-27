@@ -16,12 +16,14 @@ class Payment extends React.Component {
   static contextType = Context
   constructor(props) {
     super(props);
+    this.state = {
+      jumlah : 1,
+      price : this.props.route.params.data.harprod,
+      ongkir : 12000,
+      title:this.props.route.params.title,
+      desc:this.props.route.params.desc
+    };
   }
-  state = {
-    jumlah : 1,
-    price : 30000,
-    ongkir : 12000
-  };
   componentDidMount() {
     (async ()=>{
       try {
@@ -46,6 +48,18 @@ class Payment extends React.Component {
   toCurency(num){
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
   }
+  addHistory = async () =>{
+    try {
+      await firestore().collection("History").add({
+        title:this.state.title + " - " + this.props.route.params.data.namprod,
+        desc:this.state.desc,
+        price:(this.state.jumlah * this.state.price) + this.state.ongkir,
+        phone:this.state.phone
+      })
+    } catch (e) {
+      console.log(e);
+    }
+  }
   actionBayar = async () => {
     try {
       const ctx = this.context
@@ -53,12 +67,13 @@ class Payment extends React.Component {
         const curBalance = parseInt(this.state.balance) - parseInt((this.state.jumlah * this.state.price) + this.state.ongkir);
         const res = await firestore().doc(this.state.path).update({balance:curBalance})
         ctx[1](curBalance)
+        this.addHistory();
         this.props.navigation.navigate("Result")
       }else {
         alert("Saldo anda tidak cukup");
       }
     } catch (e) {
-
+      console.log(e);
     }
   }
   render() {
@@ -73,13 +88,13 @@ class Payment extends React.Component {
             <View style={{width: "30%",padding: 10}}>
               <Image
                 style={{resizeMode:'cover',width: 80,height: 80, alignSelf: 'flex-start', borderRadius: 20}}
-                source={require('./../../../assets/img/Shop/produk.jpg')}
+                source={this.props.route.params.data.imgprod}
                 />
             </View>
             <View style={{width: "70%",position: 'relative'}}>
-              <Text style={{fontWeight: 'bold',fontSize: 20}}>Cookie Monster</Text>
-              <Text style={{fontSize: 16}}>Blue Monster with fudgy chocolate chip filling</Text>
-              <Text style={{fontSize: 17, fontWeight: 'bold'}}>50.000</Text>
+              <Text style={{fontWeight: 'bold',fontSize: 20}}>{this.props.route.params.data.namprod}</Text>
+              <Text style={{fontSize: 16}}>{this.props.route.params.data.ketprod}</Text>
+              <Text style={{fontSize: 17, fontWeight: 'bold'}}>{this.props.route.params.data.harprod.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</Text>
               <View style={{borderWidth: 1,borderColor: "transparent", flexDirection: 'row', alignItems: 'center',position: 'absolute',right: 10,bottom: 10,width: 80, justifyContent: 'space-between', paddingHorizontal: 10}}>
                 <TouchableWithoutFeedback onPress={()=>this.setState(state=>({jumlah:state.jumlah-1}))}>
                   <Text style={{color: "#00A512",fontWeight: 'bold',fontSize: 18}}>-</Text>

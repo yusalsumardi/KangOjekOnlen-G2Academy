@@ -5,6 +5,7 @@ import { Input } from '@ui-kitten/components';
 import Header from './../../../component/molecules/Header';
 import SearchBar from './../../../component/molecules/SearchBar';
 import TitleContent from './../../../component/molecules/TitleContent';
+import DataStore from './FileData';
 
 import Slider from './../../organism/Slider';
 import StoreList from './../../organism/StoreList';
@@ -61,8 +62,13 @@ class ShopScreen extends React.Component {
             {/*Title Content*/}
             <TitleContent iconName="bulb-outline" title="Recomend Store" />
             {/*Store List*/}
-            <StoreList name="Toko A" action={()=>this.props.navigation.navigate("DetailStore",{name:"Toko A"})} image={require('./../../../assets/img/Shop/toko1.jpg')} category="Fashion & Accesoris" />
-            <StoreList name="Toko B" action={()=>this.props.navigation.navigate("DetailStore",{name:"Toko B"})} image={require('./../../../assets/img/Shop/toko2.jpg')} category="Electronic" />
+
+            {DataStore.map((item,i)=>{
+              const img = `./../../../assets/img/Shop/${item.imgtoko}`;
+              return (
+                <StoreList key={i} name={item.toko} action={()=>this.props.navigation.navigate("DetailStore",{name:item.toko,data:item})} image={item.imgtoko} category={item.keterangan} />
+              )
+            })}
         </ScrollView>
       </View>
     )
