@@ -39,19 +39,21 @@ function NotLogged(props) {
 }
 function Logged(props) {
   return(
-    <Stack.Navigator initialRouteName="HomeView">
-      <Stack.Screen name="HomeView" component={HomeView} options={{headerShown:false}} />
-      <Stack.Screen name="Ride" component={Ride} options={{headerShown:false}} />
-      <Stack.Screen name="PayRide" component={PayRide} options={{headerShown:false}} />
-      <Stack.Screen name="Shop" component={Shop} options={{headerShown:false}} />
-      <Stack.Screen name="DetailStore" component={DetailStore} options={{headerShown:false}} />
-      <Stack.Screen name="Payment" component={Payment} options={{headerShown:false}} />
-      <Stack.Screen name="Result" component={Result} options={{headerShown:false}} />
-      {/*Yusal*/}
-      <Stack.Screen name="Profile" children={nav=><Profile {...nav} state={props.state} />}/>
-      {/*Rifqi*/}
-      <Stack.Screen name="Chat" component={Chat} />
-    </Stack.Navigator>
+    <AppContext>
+      <Stack.Navigator initialRouteName="HomeView">
+        <Stack.Screen name="HomeView" component={HomeView} options={{headerShown:false}} />
+        <Stack.Screen name="Ride" component={Ride} options={{headerShown:false}} />
+        <Stack.Screen name="PayRide" component={PayRide} options={{headerShown:false}} />
+        <Stack.Screen name="Shop" component={Shop} options={{headerShown:false}} />
+        <Stack.Screen name="DetailStore" component={DetailStore} options={{headerShown:false}} />
+        <Stack.Screen name="Payment" component={Payment} options={{headerShown:false}} />
+        <Stack.Screen name="Result" component={Result} options={{headerShown:false}} />
+        {/*Yusal*/}
+        <Stack.Screen name="Profile" children={nav=><Profile {...nav} state={props.state} />}/>
+        {/*Rifqi*/}
+        <Stack.Screen name="Chat" component={Chat} />
+      </Stack.Navigator>
+    </AppContext>
   )
 }
 
@@ -75,21 +77,19 @@ class App extends React.Component {
   }
   render(){
     return(
-      <AppContext>
-        <ApplicationProvider {...eva} theme={eva.light}>
-          {this.state.isLoading ? (
-            <NavigationContainer>
-              <Stack.Navigator initialRouteName="Splash">
-                <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}} />
-              </Stack.Navigator>
-            </NavigationContainer>
-          ):(
-            <NavigationContainer>
-              {this.state.isLogged ? <Logged state={this} /> : <NotLogged state={this} />}
-            </NavigationContainer>
-          )}
-        </ApplicationProvider>
-      </AppContext>
+      <ApplicationProvider {...eva} theme={eva.light}>
+        {this.state.isLoading ? (
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Splash">
+              <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        ):(
+          <NavigationContainer>
+            {this.state.isLogged ? <Logged state={this} /> : <NotLogged state={this} />}
+          </NavigationContainer>
+        )}
+      </ApplicationProvider>
     )
   }
 }
