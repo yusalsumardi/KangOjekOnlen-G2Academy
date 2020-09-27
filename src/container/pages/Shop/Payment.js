@@ -50,12 +50,16 @@ class Payment extends React.Component {
   }
   addHistory = async () =>{
     try {
-      await firestore().collection("History").add({
+      const ctx = this.context
+      const data = {
         title:this.state.title + " - " + this.props.route.params.data.namprod,
         desc:this.state.desc,
         price:(this.state.jumlah * this.state.price) + this.state.ongkir,
         phone:this.state.phone
-      })
+      }
+      await firestore().collection("History").add(data)
+      const nwHs = await firestore().collection("History").where("phone","==",this.state.phone).get();
+      ctx[3](nwHs.docs);
     } catch (e) {
       console.log(e);
     }

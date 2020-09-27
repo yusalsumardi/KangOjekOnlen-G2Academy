@@ -96,6 +96,7 @@ class App extends React.Component {
 
 function AppContext(props) {
   const [balance,setBalance] = React.useState(0);
+  const [history, setHistory] = React.useState([]);
   React.useEffect(()=>{
     (async ()=>{
       try {
@@ -103,13 +104,19 @@ function AppContext(props) {
         const bln = await firestore().doc(JSON.parse(dataLocal).path).get();
         const balance = bln.data().balance
         setBalance(balance)
+
+        const history = await firestore()
+        .collection("History")
+        .where('phone','==',JSON.parse(dataLocal).phone)
+        .get();
+        setHistory(history.docs)
       } catch (e) {
         console.log(e);
       }
     })()
   },[balance])
   return(
-    <Context.Provider value={[balance,setBalance]}>
+    <Context.Provider value={[balance,setBalance,history, setHistory]}>
       {props.children}
     </Context.Provider>
   )

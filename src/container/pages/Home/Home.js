@@ -20,15 +20,10 @@ class Home extends React.Component {
       try {
         const data = await AsyncStorage.getItem("userLogged");
         const bln = await firestore().doc(JSON.parse(data).path).get();
-        const history = await firestore()
-        .collection("History")
-        .where('phone','==',JSON.parse(data).phone)
-        .get();
         const res = bln.data().balance
         if (data) {
           this.setState(JSON.parse(data))
         }
-        this.setState({history:history.docs})
         this.setState({balance:res});
         this.setState({isLoading:false})
       } catch (e) {
@@ -80,22 +75,27 @@ class Home extends React.Component {
                 </View>
               </View>
             </View>
-            <View style={{flex: 1, marginTop: 30, marginBottom: 20}}>
-              <View style={{flexDirection: 'row'}}>
-                <Icon name="clipboard-outline" width="20" height="20" fill="#3498db" />
-                <Text style={{fontSize: 18, marginBottom: 10, marginLeft: 5}}>Aktivitas kamu terakhir</Text>
-              </View>
-              {this.state.history.map((item,i)=>(
-                <View key={i} style={{width: "100%", backgroundColor: "#fff" , borderWidth: 1, borderColor: "#ddd", borderRadius: 20, padding: 20, flexDirection: 'row', justifyContent: 'space-between',marginBottom: 10}}>
-                  <View>
-                    <Text style={{fontSize: 20, fontWeight: "bold"}}>{item.data().title}</Text>
-                    <Text style={{fontSize: 16, color: "#333", marginTop: 5}}>{item.data().desc}</Text>
+            <Context.Consumer>
+              {htry=>{
+                return(
+                  <View style={{flex: 1, marginTop: 30, marginBottom: 20}}>
+                    <View style={{flexDirection: 'row'}}>
+                      <Icon name="clipboard-outline" width="20" height="20" fill="#3498db" />
+                      <Text style={{fontSize: 18, marginBottom: 10, marginLeft: 5}}>Aktivitas kamu terakhir</Text>
+                    </View>
+                    {htry[2].map((item,i)=>(
+                      <View key={i} style={{width: "100%", backgroundColor: "#fff" , borderWidth: 1, borderColor: "#ddd", borderRadius: 20, padding: 20, flexDirection: 'row', justifyContent: 'space-between',marginBottom: 10}}>
+                        <View>
+                          <Text style={{fontSize: 20, fontWeight: "bold"}}>{item.data().title}</Text>
+                          <Text style={{fontSize: 16, color: "#333", marginTop: 5}}>{item.data().desc}</Text>
+                        </View>
+                        <Text style={{fontSize: 20}}>- Rp{item.data().price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</Text>
+                      </View>
+                    ))}
                   </View>
-                  <Text style={{fontSize: 20}}>- Rp{item.data().price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</Text>
-                </View>
-              ))}
-
-            </View>
+                )
+              }}
+            </Context.Consumer>
           </ScrollView>
         </View>
         <View style={{padding: 10, backgroundColor: "#fff", elevation: 15, flexDirection: 'row',justifyContent: 'space-around',marginRight: 2}}>

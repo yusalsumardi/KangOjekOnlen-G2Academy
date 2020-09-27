@@ -1,12 +1,62 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ButtonLanding from '../../../component/atoms/ButtonLanding'
+import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-community/async-storage';
+import Context from './../../../context';
 
 class PayRide extends React.Component {
+    static contextType = Context
     constructor(props) {
         super(props);
+        this.state={
+          title:"Ride",
+          desc:this.props.route.params.asal + " - " + this.props.route.params.tujuan,
+          price:35000,
+        }
     }
-
+    componentDidMount() {
+      (async ()=>{
+        try {
+          const phone = await AsyncStorage.getItem("userLogged")
+          const dataPhone = JSON.parse(phone)
+          this.setState(dataPhone)
+        } catch (e) {
+          console.log(e);
+        }
+      })()
+    }
+    addHistory = async () =>{
+      try {
+        const ctx = this.context
+        await firestore().collection("History").add({
+          title:this.state.title ,
+          desc:this.state.desc,
+          price:this.state.price,
+          phone:this.state.phone
+        })
+        const nwHs = await firestore().collection("History").where("phone","==",this.state.phone).get();
+        ctx[3](nwHs.docs);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    actionBayar =async () =>{
+      try {
+        const ctx = this.context
+        if (ctx[0] >= this.state.price) {
+          const curBalance = parseInt(ctx[0]) - this.state.price;
+          const res = await firestore().doc(this.state.path).update({balance:curBalance})
+          ctx[1](curBalance)
+          await this.addHistory();
+          this.props.navigation.navigate("Result")
+        }else {
+          alert("Saldo anda tidak cukup");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
     render() {
         return(
             <View style={styles.container}>
@@ -42,7 +92,7 @@ class PayRide extends React.Component {
                         />
                         <ButtonLanding style={styles.button}
                         buttonName="Proses"
-                        action={() => this.props.navigation.navigate("Result")}
+                        action={this.actionBayar}
                         />
                     </View>
                 </View>
