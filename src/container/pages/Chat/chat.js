@@ -8,7 +8,8 @@ import {
 import ChatBot from 'react-native-chatbot'
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs();//Ignore all log notifications
+LogBox.ignoreAllLogs(true);//Ignore all log notifications
+// console.disableYellowBox = true;
 const steps = [
     {
         id: "1",

@@ -1,5 +1,6 @@
 import Chat from './Chat';
 import Home from './Home';
+import HomeView from './HomeView'
 import Landing from './Landing/landing';
 import Login from './Landing/login';
 import OTP from './Landing/otp';
@@ -14,6 +15,7 @@ import Splash from './Splash';
 export {
   Chat,
   Home,
+  HomeView,
   Landing,
   Login,
   OTP,
