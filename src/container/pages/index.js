@@ -7,6 +7,7 @@ import OTP from './Landing/otp';
 import Register from './Landing/register';
 import Profile from './Profile';
 import Ride from './Ride';
+import PayRide from './PayRide'
 import Shop from './Shop/ShopScreen';
 import DetailStore from './Shop/DetailStore';
 import Payment from './Shop/Payment';
@@ -22,6 +23,7 @@ export {
   Register,
   Profile,
   Ride,
+  PayRide,
   Shop,
   DetailStore,
   Payment,

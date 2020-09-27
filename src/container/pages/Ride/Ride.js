@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Input } from '@ui-kitten/components';
 import { Icon } from 'react-native-eva-icons';
 import { Button } from '@ui-kitten/components';
+import ButtonLanding from '../../../component/atoms/ButtonLanding'
 
 class Ride extends React.Component {
   constructor(props) {
@@ -11,6 +12,8 @@ class Ride extends React.Component {
   state ={
     show : true
   }
+
+  
   render() {
     return(
       <View style={{flex: 1,backgroundColor: "#31B057", justifyContent: 'flex-end'}}>
@@ -25,11 +28,32 @@ class Ride extends React.Component {
           <Text style={{fontSize: 22, fontWeight: 'bold'}}>Mau kemana hari ini?</Text>
           <Input
           style={{marginTop: 10,borderRadius: 50}}
-          placeholder='Cari Lokasi Tujuan'
+          placeholder='Cari Lokasi Pemberangkatan'
           accessoryLeft={()=><Icon width="20" height="20" name="search-outline" fill="#444" />}
           onFocus={()=>this.setState({show:false})}
           onBlur={()=>this.setState({show:true})}
-        />
+          onChangeText={text=>this.setState({asal:text})}
+          />
+          <Input
+            style={{marginTop: 10,borderRadius: 50}}
+            placeholder='Cari Lokasi Tujuan'
+            accessoryLeft={()=><Icon width="20" height="20" name="search-outline" fill="#444" />}
+            onFocus={()=>this.setState({show:false})}
+            onBlur={()=>this.setState({show:true})}
+            onChangeText={text=>this.setState({tujuan:text})}
+          />
+          <View
+            style={{
+              // flexDirection: 'row',
+              justifyContent: 'center',
+              marginTop: 25,
+              marginLeft: 120
+            }}>
+            <ButtonLanding
+              buttonName="Selanjutnya"
+              action={() => this.props.navigation.navigate("PayRide", {asal: this.state.asal, tujuan: this.state.tujuan})}
+            />
+          </View>
         </View>
       </View>
     )
@@ -37,7 +61,7 @@ class Ride extends React.Component {
 }
 
 const style = StyleSheet.create({
-  show:{padding: 20,height: 200,backgroundColor: "#fff",width: "100%", borderTopRightRadius: 25,borderTopLeftRadius: 25},
+  show:{padding: 20,height: 260,backgroundColor: "#fff",width: "100%", borderTopRightRadius: 25,borderTopLeftRadius: 25},
   hide:{padding: 20, backgroundColor: "#fff",width: "100%", flex: 1},
 })
 export default Ride;
