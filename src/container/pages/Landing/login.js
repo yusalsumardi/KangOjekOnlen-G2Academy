@@ -3,17 +3,31 @@ import {Text, View} from 'react-native';
 import InputLoginNomor from '../../organism/InputLoginNomor';
 import {Icon} from 'react-native-eva-icons';
 import {Button} from '@ui-kitten/components';
+import firestore from '@react-native-firebase/firestore';
 
 export default class login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      value: '+62',
     };
   }
 
-  goScreen = (toScreen) => {
-    this.props.navigation.navigate(toScreen);
+  goScreen = async (toScreen) => {
+    try {
+      const count = await firestore().collection("User").where("phone","==",this.state.value).get();
+      console.log();
+      if (count.size > 0) {
+        const path = count.docs[0].ref.path;
+        const data = count.docs[0].data();
+        data.path = path;
+        this.props.navigation.navigate(toScreen,{data});
+      }else {
+        alert("Nomor tidak terdaftar");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   render() {

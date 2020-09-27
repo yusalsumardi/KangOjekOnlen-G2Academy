@@ -3,20 +3,28 @@ import {Text, View} from 'react-native';
 import InputOTP from '../../organism/InputOTP';
 import {Icon} from 'react-native-eva-icons';
 import {Button} from '@ui-kitten/components';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class otp extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: '',
-      OTP: 1234,
+      OTP: 123456,
       isOTPTrue: false,
     };
   }
 
-  authOTP = (val) => {
+  authOTP = async (val) => {
     if (val == this.state.OTP) {
-      this.props.state.setState({isLogged:true})
+      try {
+        await AsyncStorage.setItem('isLogged', "1");
+        const data = this.props.route.params.data;
+        await AsyncStorage.setItem('userLogged',JSON.stringify(data));
+        this.props.state.setState({isLogged:true})
+      } catch (e) {
+        console.log(e);
+      }
     } else {
       this.setState({
         isOTPTrue: true,
@@ -55,7 +63,7 @@ export default class otp extends Component {
         {this.state.isOTPTrue ? (
           <Text style={{color: 'red'}}>Salah tong</Text>
         ) : null}
-        {this.state.value.length >= 4 ? (
+        {this.state.value.length >= 6 ? (
           <View
             style={{
               position: 'absolute',
