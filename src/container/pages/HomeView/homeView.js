@@ -16,26 +16,27 @@ export default class HomeView extends React.Component {
         }
     }
 
-    
+
     render(){
         return(
             <View style={styles.container}>
                 <TabTop.Navigator
                     tabBarOptions={{
                         style: {
-                            backgroundColor: '#06AD38',                        
+                            backgroundColor: '#35B031',
                         },
+                        activeTintColor: '#e91e63',
                         labelStyle: { color: 'white' },
                         pressColor: '#24723B'
                     }}
                 >
-                    <TabTop.Screen 
-                            name="Home" 
+                    <TabTop.Screen
+                            name="Home"
                             children={(props) =>
                             <Home {...props}
-                            />} 
+                            />}
                     />
-                    <TabTop.Screen name="Chat" 
+                    <TabTop.Screen name="Chat"
                             children={(props) =>
                             <Chat {...props}
                             />}
@@ -50,5 +51,5 @@ var styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: '#FEE9E4'
-    } 
+    }
 })

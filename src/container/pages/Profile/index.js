@@ -18,7 +18,6 @@ export default class index extends Component {
       try {
         const data = await AsyncStorage.getItem("userLogged");
         if (data) {
-          console.log(data);
           this.setState(JSON.parse(data))
         }
         this.setState({isLoading:false})
@@ -34,7 +33,6 @@ export default class index extends Component {
         email:this.state.email
       };
       await AsyncStorage.setItem("userLogged",JSON.stringify(this.state));
-      console.log(this.state.path);
       await firestore().doc(this.state.path).update(data)
       alert("Berhasil merubah data");
     } catch (e) {

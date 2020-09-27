@@ -3,13 +3,12 @@ import {
     View,
     StyleSheet,
     ScrollView,
-    Text
+    Text,
+    LogBox
 } from "react-native"
 import ChatBot from 'react-native-chatbot'
-import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs(true);//Ignore all log notifications
-// console.disableYellowBox = true;
+
+
 const steps = [
     {
         id: "1",
@@ -68,6 +67,7 @@ export default class Chat extends React.Component {
         super(props);
     }
     render(){
+        LogBox.ignoreAllLogs();//Ignore all log notifications
         return(
             <View style={styles.container}>
                 <ChatBot steps={steps} />
