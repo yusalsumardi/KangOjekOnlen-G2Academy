@@ -11,7 +11,7 @@ class PayRide extends React.Component {
         return(
             <View style={styles.container}>
                 <View style={styles.contain}>
-                    <Text 
+                    <Text
                     style={{
                         fontSize: 18
                     }}>
@@ -46,29 +46,27 @@ class PayRide extends React.Component {
                         />
                     </View>
                 </View>
-                
+
             </View>
         )
     }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#31b057'
+  },
+  contain: {
+    paddingTop: 60,
+    marginTop: 300,
+    backgroundColor: 'white',
+    borderRadius: 25,
+    alignItems: 'center'
+  },
+  button: {
+    marginLeft: 10,
+    marginRight: 10
+  }
+});
 
 export default PayRide;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#31b057'
-    },
-    contain: {
-        paddingTop: 60,
-        marginTop: 300,
-        backgroundColor: 'white',
-        borderRadius: 25,
-        alignItems: 'center'
-    },
-    button: {
-        marginLeft: 10,
-        marginRight: 10
-    }
-  });
-  

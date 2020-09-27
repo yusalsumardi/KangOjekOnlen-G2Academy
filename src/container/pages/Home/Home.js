@@ -39,7 +39,7 @@ class Home extends React.Component {
   render() {
     return (
       <View style={{flex: 1, backgroundColor: "#35B031", justifyContent: 'space-between'}}>
-        <View style={{flex: 1,paddingVertical: 20, backgroundColor: "#fff", borderTopRightRadius: 30,borderTopLeftRadius: 30}}>
+        <View style={{flex: 1,paddingVertical: 20, backgroundColor: "#fff", borderTopRightRadius: 30,borderTopLeftRadius: 30, marginRight: 2}}>
           <ScrollView style={{flex: 1, padding: 20, }} showsVerticalScrollIndicator={false}>
             <View style={{flexDirection: 'row', width: "100%", alignItems: 'center', justifyContent: 'space-between'}}>
               <SearchBar style={{width: "85%", borderRadius: 20}} title="Cari Layanan..." />
@@ -55,7 +55,7 @@ class Home extends React.Component {
                 </View>
                 <Context.Consumer>
                   {ctx=>(
-                    <Text style={{fontWeight: 'bold', fontSize: 16}}>{ctx[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 14}}>{ctx[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</Text>
                   )}
                 </Context.Consumer>
               </View>
@@ -98,7 +98,7 @@ class Home extends React.Component {
             </View>
           </ScrollView>
         </View>
-        <View style={{padding: 10, backgroundColor: "#fff", elevation: 15, flexDirection: 'row',justifyContent: 'space-around'}}>
+        <View style={{padding: 10, backgroundColor: "#fff", elevation: 15, flexDirection: 'row',justifyContent: 'space-around',marginRight: 2}}>
             <TouchableOpacity onPress={()=>this.props.navigation.navigate("Ride")}>
               <View>
                 <Icon width="25" height="25" fill="#3498db" name="compass-outline" />

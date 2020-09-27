@@ -24,7 +24,7 @@ export default class register extends Component {
         if (count.size > 0) {
           alert("Nomor Telah di daftarkan");
         }else {
-          this.setState({balance:75000});
+          this.setState({balance:750000});
           const data = await firestore().collection("User").add(this.state);
           this.setState({path:data.path})
           this.props.navigation.navigate("OTP",{data:this.state});
