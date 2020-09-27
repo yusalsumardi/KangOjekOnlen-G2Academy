@@ -25,9 +25,27 @@ export default class HomeView extends React.Component {
                         style: {
                             backgroundColor: '#35B031',
                         },
-                        activeTintColor: '#e91e63',
-                        labelStyle: { color: 'white' },
-                        pressColor: '#24723B'
+                        labelStyle: {
+                            color: 'white',
+                        },
+                        tabStyle: {
+                            marginHorizontal: 50,
+                            marginVertical: 5
+                        },
+                        pressColor: '#24723B',
+                        upperCaseLabel: 'false',
+                        showIcon: true,
+                        showLabel: true,
+                        indicatorStyle: {
+                            width: "25%",
+                            backgroundColor: "#24723B",
+                            borderWidth: 25,
+                            borderColor: '#24723B',
+                            borderRadius: 30,
+                            marginTop: 5,
+                            marginBottom: 5,
+                            marginLeft: 55
+                        }
                     }}
                 >
                     <TabTop.Screen
